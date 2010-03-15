@@ -1,0 +1,40 @@
+
+http://t3.dotgnu.info/blog/php/demystifying-autofilter
+
+Compile and execute 
+include is evaluated at runtime . 
+
+APC handles compile, not excute 
+
+Compiling a php file gives a signle opcode stream , a list of functions and yet another list of classes
+
+the includes in that file are only processed when you actually execute the code compiled 
+
+code:
+<?php
+include_once "parent.php";
+
+class Child extends Parent
+{
+}
+?>
+
+Child is created at compile time, but parent is waited until execute time
+
+ZEND_FETCH_CLASS              :1, 'Parent'
+ZEND_DECLARE_INHERITED_CLASS  null, '<mangled>', 'child
+
+code :
+include_once "parent.php";
+include_once "child.php";
+
+$a = new Child();
+
+Since obviously the parent class is already compiled & ready, Zend does something intelligent by removing the two instructions and replacing them by NOPs.
+
+
+Here's the kicker of the problem. Which of these versions should APC cache? Obviously, the dynamically inherited version is valid for both cases - but APC caches whatever it encounters initially. The static version is obviously incompatible in a dynamic scenario.
+
+So whenever APC detects that it has cached a static version, but this case actually requires a dynamic version, it decides to not cache that file *at* all from that point onwards. That's what the APC autofiltering does. 
+
+
