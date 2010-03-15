@@ -1,0 +1,70 @@
+As you may know from my previous post, I just bought a new hard disk and installed Windows 7 on it. But you know me, I won’t let Ubuntu down , so I installed it today. I was thinking to use dd to move my whole Linux partition to new hard disk, but I have several issues with this method.
+
+1. I only allocated 20G for my old Ubuntu and it’s running out of space. This is one of the key reason why I want to buy a new / bigger hard drive .
+
+2. I only use one partition for my old Ubuntu which means I may have to move again when Ubuntu 10.04 comes.
+
+Finally I decided to partition my drive the way I described below
+
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda6              25G  2.5G   22G  11% /
+udev                  1.5G  368K  1.5G   1% /dev
+none                  1.5G  272K  1.5G   1% /dev/shm
+none                  1.5G   84K  1.5G   1% /var/run
+none                  1.5G     0  1.5G   0% /var/lock
+none                  1.5G     0  1.5G   0% /lib/init/rw
+none                   25G  2.5G   22G  11% /var/lib/ureadahead/debugfs
+/dev/sda2              74G  9.6G   61G  14% /home
+/dev/sdb5              18G   15G  2.5G  86% /media/42e33181-23cf-41b0-b59f-73768d6c1ac9
+/dev/sdb2              51G   39G   12G  77% /media/BA8C7FBC8C7F722D
+/dev/sda3             196G   27G  169G  14% /media/06DA0A15DA0A01A3
+
+As you can see, I created a 74G partition for my /home directory and 25G for my root / directory. Those 3 media partitions are my Windows 7 on new drive, Windows XP and Ubuntu on my old one.
+
+When Ubuntu 10.04 comes, I can easily to do a refresh install in / and keep my /home untouched. This way I don’t need to do the backup and restore as I am going to describe.
+
+To move my old Ubuntu to new hard disk, here are the steps what I did
+
+1. Download Ubuntu desktop ISO from Ubuntu website
+
+2. Transform iso into usb flash drive using UNetBootin.
+
+3. Boot from usb drive and install Ubuntu as normal
+
+4. Mount old hard disk in external enclosure on Ubuntu
+
+5. Using rsync to create and restore old home to /home/jqyao_old .
+
+sudo rsync -axS –exclude=’/*/.gvfs’ /media/42e33181-23cf-41b0-b59f-73768d6c1ac9/home/jqyao/ /home/jqyao_old/
+
+It took my x61t around 5 minutes to finish this step. The reason to use rsync is because it can keep all the permission and group/user information for all my files.
+
+6. sudo mv jqyao jqyao.bak ; sudo mv jqyao_old jqyao
+
+Restart and I am seeing all my personal staff back. The drawback is that I still need to manually install packages. Trying to find a way to generate installed packages list using apt-get/aptitude so we can easily restore from that package list. I think this could be very useful and I need to do more research on this.
+
+Anyway, I am pretty happy with my new 7200rpm hard drive and Windows 7 / Ubuntu 9.10 dual boot on my x61t.
+
+Update: I just found this article http://www.cyberciti.biz/tips/linux-get-list-installed-software-reinstallation-restore.html and it says you can use dpkg for backup/restore purpose. I haven’t tried yet, but will keep this update.
+
+Update , I had installed these packages
+
+jqyao@jqyao-x61t:~$ history | grep apt | grep install
+150  sudo aptitude install php5-dev
+176  sudo aptitude install php-codesniffer
+416  sudo aptitude install flashplugin-nonfree
+437  sudo aptitude install cellwriter
+440  sudo aptitude install ibus-pinyin
+442  sudo aptitude install xournal
+444  sudo aptitude install thunderbird
+446  sudo aptitude install pidgin
+460  sudo aptitude install vim-gnome
+462  sudo aptitude install emcacs23-nox
+468  sudo aptitude install ctags
+470  sudo aptitude install sun-java6-jdk
+471  sudo aptitude install eclipse
+499  sudo apt-get install virtualbox-3.1
+503  sudo aptitude install git subversion php5-dev php5 php5-cli
+505  sudo apt-get install build-essential
+506  sudo apt-get install ruby
+512  sudo apt-get install irb
