@@ -38,3 +38,39 @@ Here's the kicker of the problem. Which of these versions should APC cache? Obvi
 So whenever APC detects that it has cached a static version, but this case actually requires a dynamic version, it decides to not cache that file *at* all from that point onwards. That's what the APC autofiltering does. 
 
 
+
+PHP 
+
+
+This startup and shutdown process happens in two separate startup phases and two separate shutdown phases. One cycle is for the PHP interpreter as a whole to perform an initial setup of structures and values that will persist for the life of the SAPI. The second is for transient settings that only last as long as a single page request.
+
+During the initial startup, before any request has been made, PHP calls every extension's MINIT (Module Initialization) method. Here, extensions are expected to declare constants, define classes, and register resource, stream, and filter handlers that all future script requests will use. Features such as these, which are designed to exist across all requests, are referred to as being persistent.
+
+After a request has been made, PHP sets up an operating environment including a symbol table (where variables are stored) and synchronizes per-directory configuration values. PHP then loops through its extensions again, this time calling each one's RINIT (Request Initialization) method. Here, an extension may reset global variables to default values, prepopulate variables into the script's symbol table, or perform other tasks such as logging the page request to a file. RINIT can be thought of as a kind of auto_prepend_file directive for all scripts requested.
+
+After a request has completed processing, either by reaching the end of the script file or by exiting through a die() or exit() statement, PHP starts the cleanup process by calling each extension's RSHUTDOWN (Request Shutdown) method. RSHUTDOWN corresponds to auto_append_file in much the same was as RINIT corresponds to auto_prepend_file. The most important difference between RSHUTDOWN and auto_append_file, however, is that RSHUTDOWN will always be executed, whereas a call to die() or exit() inside the userspace script will skip any auto_append_file.
+
+Any last minute tasks that need to be performed can be handled in RSHUTDOWN before the symbol table and other resources are destroyed. After all RSHUTDOWN methods have completed, every variable in the symbol table is implicitly unset(), during which all non-persistent resource and object destructors are called in order to free resources gracefully.
+
+
+Finally, when all requests have been fulfilled and the web server or other SAPI is ready to shut down, PHP loops through each extension's MSHUTDOWN (Module Shutdown) method. This is an extension's last chance to unregister handlers and free persistent memory allocated during the MINIT cycle.
+
+
+
+Each PHP instance, whether started from an init script, or from the command line, follows a series of events involving both the Request/Module Init/Shutdown events covered previously, and the actual execution of scripts themselves. How many times, and how frequently each startup and shutdown phase is executed, depends on the SAPI in use. The four most common SAPI configurations are CLI/CGI, Multiprocess Module, Multithreaded Module, and Embedded.
+
+The most common configuration of PHP embedded into a web server is using PHP built as an APXS module for Apache 1, or Apache 2 using the Pre-fork MPM. Many other web server configurations fit into this same category, which will be referred to as the multiprocess model through the rest of this book.
+
+It's called the multiprocess model because when Apache starts up, it immediately forks several child processes, each of which has its own process space and functions independently from each another. Within a given child, the life cycle of that PHP instance looks immediately familiar as shown in Figure 1.2. The only variation here is that multiple requests are sandwiched between a single MINIT/MSHUTDOWN pair.
+
+
+
+
+
+This PHP script goes through the following processes before outputting the result:
+
+    * Lexing: The php code inside debug.php is converted into tokens
+    * Parsing: During this stage, tokens are processed to derive at meaningful expressions
+    * Compiling: The derived expressions are compiled into opcodes
+    * Execution: Opcodes are executed to derive at the final result
+
