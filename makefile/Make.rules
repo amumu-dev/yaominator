@@ -1,0 +1,16 @@
+
+ifndef DIR
+DIR=origin
+endif
+
+ifdef BUILD_NUMBER
+dir:
+ifdef DIR
+	@echo 'define dir'
+else
+	@echo 'not define '
+endif
+else
+dir: 
+	@echo 'i am ' $(DIR)
+endif
