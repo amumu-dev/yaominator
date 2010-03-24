@@ -1,0 +1,10 @@
+When talking about PHP, people just says it is a very simple language.
+
+How "Compilation" works
+
+code -> lexer -> parser -> opcodes -> execution 
+
+interpretation of the opcodes by the PHP VM. 
+
+
+strace -e trace=file httpd -X

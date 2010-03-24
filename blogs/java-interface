@@ -1,0 +1,51 @@
+This is the note that I took for Core Java, chapter 6, Interfaces and inner classes.
+
+Interface is like class, you can only have one public interface in your file and your file has to be named as intefacename.java.
+Interface is not class, you can never user new operator to instantiate an interface.
+You can still declare interface variables.
+
+x = new Comparable( ... );  //ERROR
+Comparable X ;              // OK
+x = new Employee( ... );    // OK if class Employee implements Comparable 
+if( x instanceof Comparable ) { ... } // OK
+
+
+Interface can extend inteface.
+Methods in an interface are automatically public.
+Fields are always public static final as constant.
+Class can implement multiple interfaces.
+
+class Employee implements Cloneable, Comparable 
+
+Usual purpose of an interface is to ensure that a class implements a particular method(s). A tagging interface has no methods; it only purpose is to allow the use of instanceof in a type inquiry:
+
+if( obj instanceof Cloneable ) ...
+
+// Implement deep copy
+class Employee implements Cloneable
+{
+    public Employee clone() throws CloneNotSupporedException
+    {
+        // call Object.clone 
+        Employee cloned = (Employee) super.clone();
+        cloned.hireDay  = (Date) hireDay.clone();
+        return cloned;
+    }
+}
+
+Interface and callbacks
+
+Java does have the equivalent of function pointers, namely, Method objects. However, whenever you would use a function pointer in C++, you should consider using an interface in Java.
+
+Inner Classes 
+
+Why would you want to do that ?
+1. Inner class methods can access the data from the scope in which they are defined -- including data that would otherwise be private.
+2. Inner classes can be hidden from other classes in the same package.
+3. Anonymous inner classes are handy when you want to define callback without writing a lot of code .
+
+C++ has nested classes. A nested class is contained inside the scope of the enclosing class.
+
+A nested class is a member of its enclosing class. Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class. As a member of the OuterClass, a nested class can be declared private, public, protected, or package private. (Recall that outer classes can only be declared public or package private.)
+
+http://java.sun.com/docs/books/tutorial/java/javaOO/nested.html
