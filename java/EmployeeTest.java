@@ -26,8 +26,8 @@ public class EmployeeTest
     public static void main(String[] args)
     {
         /* For string , you can only use " , but not ' */
-        Employee jiqing = new Employee("Jiqing Yao" , 95000);
-        Employee leo    = new Employee("Leo Li" , 90000);
+        Employee jiqing = new Employee("haha" , 1000);
+        Employee leo    = new Employee("hehe" , 2000);
         int result      = jiqing.compareTo(leo);
         switch (result) {
             case 1: 
