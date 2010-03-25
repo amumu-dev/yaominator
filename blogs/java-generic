@@ -1,0 +1,47 @@
+[sourcecode]
+// define class name with <T> for type 
+class Box<T> {
+    private T t; // T stands for type
+    public void add( T t )
+    {
+        this.t = t ;
+    }
+
+    public T get()
+    {
+        return t;
+    }
+}
+
+public class BoxDemo {
+    public static void main(String[] args ) 
+    {
+        // define variable with actual type 
+        // place <ActualType> between the class name and the parenthesis
+        Box<Integer> intBox = new Box<Integer>();
+        intBox.add( new Integer(10));
+        Integer someInt = intBox.get();
+        System.out.println( "Integer is " + someInt );
+    }
+}
+[/sourcecode]
+
+E - Element (used extensively by the Java Collections Framework)
+K - Key
+N - Number
+T - Type
+V - Value
+S,U,V etc. - 2nd, 3rd, 4th types)
+
+Type parameters can also be declared within method and constructor signatures to create generic methods and generic constructors. This is similar to declaring a generic type, but the type parameter's scope is limited to the method or constructor in which it's declared.
+
+<U extends Number> 
+To specify additional interfaces that must be implemented , use &
+<U extends Number & MyInterface>
+
+wildcards 
+Cage<? exends Animal> someCage = ... ;
+Cage<? super ANimal>  someCage = ... ;
+someCage = lionCage; // OK
+someCage = butterflyCage; // OK
+

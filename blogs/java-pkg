@@ -1,0 +1,40 @@
+This is the notes that I took while reading java tutorial. 
+
+1. package statement must be the first line in the source file.
+2. There can be only one package statement in each source file. 
+3. only one class/interface can be public, and it must have the same name as the source file. 
+4. If you don't use package statement, your type ends up in an unamed package 
+
+To use a public package member from outside its package , you must do one of the following 
+1. Refer to the member by its fully qualified name
+
+graphics.Rectangle myrect = new graphics.Rectangle(); 
+
+2. Import the package member
+
+import graphics.Rectangle ;
+Rectangle myrect = new Rectangle();
+
+3. Import the member's entire package 
+
+import graphics.*;
+Circle myCircle = new Circle();
+Rectangle myRect = new Rectangle();
+
+Packages appear to be hierarchical, but they are not.
+import java.awt.*;
+import java.awt.color.*;
+
+If you have two packages have the same member, you need to specify the full name.
+
+when you need to frequent access to static final fields(constants) and static methods from one or two classes. The static import gives you a way to import the constants and static methods that you want to use so that you do not need to prefix the name of their class.
+import static java.lang.Math.PI;
+import static java.lang.Math.*;
+
+Normally , you can have file structure like this 
+
+source\com\yahoo\tv\Show.java 
+source\com\yahoo\tv\Episode.java 
+
+classes\com\yahoo\tv\Show.class
+classes\com\yahoo\tv\Episode.class

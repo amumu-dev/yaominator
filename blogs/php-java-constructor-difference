@@ -1,0 +1,54 @@
+I know it's lampzone, but I would like to talk about a little bit Java here.
+
+In php , child's constructor never calls parent's constructor unless you call it intentionally. Like the code below, unless you uncomment out parent::__constuct() , it only prints out "I am B". 
+
+[sourcecode language="php"]
+
+<?php
+
+// testab.php
+class A {
+public function __construct()
+{
+echo " I am A\n";
+}
+}
+class B extends A {
+public function __construct()
+{
+echo " I am B\n";
+//parent::__construct();
+}
+}
+$b = new B();
+[/sourcecode]
+
+However, java does the contrary. If a child's constructor does not explicitly invoke a superclass constructor, the Java compiler automatically inserts a call to the no-argument constructor of the superclass. If the super class does not have a no-argument constructor, you will get a compile-time error. By the way, you also HAVE TO call superclass constructor at the beginning of subclass constructor. 
+
+[sourcecode language="java"]
+public class ConstructorTest {
+    public static void main( String[] args )
+    {
+        //System.out.println("Hello world"); 
+        //Parent p = new Parent();
+        Child c = new Child();
+    }
+}
+
+class Parent {
+
+    public Parent( int n )
+    {
+        System.out.println("I'm a parent" + n);
+    }
+}
+
+class Child extends Parent
+{
+    public Child()
+    {
+        super(10);
+        System.out.println("I'm a child");
+    }
+}
+[/sourcecode]
