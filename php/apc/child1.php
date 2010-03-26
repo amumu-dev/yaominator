@@ -10,3 +10,4 @@ class Child1 extends ParentClass {
 
 }
 
+$child1 = new Child1();

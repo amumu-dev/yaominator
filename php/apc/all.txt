@@ -1,0 +1,90 @@
+Array
+(
+    [0] => ZEND_NOP NULL UNUSED UNUSED
+    [1] => ZEND_NOP 0x14 UNUSED UNUSED
+    [2] => ZEND_NOP NULL UNUSED UNUSED
+    [3] => ZEND_FETCH_CLASS NULL UNUSED 'Child1'
+    [4] => ZEND_NEW T(4) NULL 0x6
+    [5] => ZEND_DO_FCALL_BY_NAME T(5) UNUSED UNUSED
+    [6] => ZEND_ASSIGN T(6) T(0) T(4)
+    [7] => ZEND_RETURN UNUSED 1 UNUSED
+    [8] => ZEND_HANDLE_EXCEPTION UNUSED UNUSED UNUSED
+    [function_table] => 
+    [class_table] => Array
+        (
+            [Child1] => Array
+                (
+                    [type] => 2
+                    [type_name] => ZEND_USER_CLASS
+                    [name] => Child1
+                    [parent] => ParentClass
+                    [constants_updated] => 
+                    [ce_flags] => 0
+                    [constructor] => __construct
+                    [clone] => 
+                    [__get] => 
+                    [__set] => 
+                    [__call] => 
+                    [properties_info] => 
+                    [static_members] => 
+                    [constants_table] => 
+                    [interfaces] => 
+                    [filename] => /home/jqyao/git.yao/php/apc/all.php
+                    [line_start] => 16
+                    [line_end] => 22
+                    [doc_comment] => 
+                    [refcount] => 1
+                    [function_table] => Array
+                        (
+                            [__construct] => Array
+                                (
+                                    [0] => ZEND_ECHO UNUSED 'i am Child1
+' UNUSED
+                                    [1] => ZEND_RETURN UNUSED NULL UNUSED
+                                    [2] => ZEND_HANDLE_EXCEPTION UNUSED UNUSED UNUSED
+                                )
+
+                        )
+
+                    [default_properties] => 
+                )
+
+            [ParentClass] => Array
+                (
+                    [type] => 2
+                    [type_name] => ZEND_USER_CLASS
+                    [name] => ParentClass
+                    [parent] => 
+                    [constants_updated] => 
+                    [ce_flags] => 0
+                    [constructor] => __construct
+                    [clone] => 
+                    [__get] => 
+                    [__set] => 
+                    [__call] => 
+                    [properties_info] => 
+                    [static_members] => 
+                    [constants_table] => 
+                    [interfaces] => 
+                    [filename] => /home/jqyao/git.yao/php/apc/all.php
+                    [line_start] => 9
+                    [line_end] => 14
+                    [doc_comment] => 
+                    [refcount] => 1
+                    [function_table] => Array
+                        (
+                            [__construct] => Array
+                                (
+                                    [0] => ZEND_ECHO UNUSED 'I am parent class...' UNUSED
+                                    [1] => ZEND_RETURN UNUSED NULL UNUSED
+                                    [2] => ZEND_HANDLE_EXCEPTION UNUSED UNUSED UNUSED
+                                )
+
+                        )
+
+                    [default_properties] => 
+                )
+
+        )
+
+)

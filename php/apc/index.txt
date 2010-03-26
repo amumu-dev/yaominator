@@ -1,0 +1,12 @@
+Array
+(
+    [0] => ZEND_INCLUDE_OR_EVAL T(0) './child1.php' 0x2
+    [1] => ZEND_FETCH_CLASS NULL UNUSED 'Child1'
+    [2] => ZEND_NEW T(2) NULL 0x4
+    [3] => ZEND_DO_FCALL_BY_NAME T(3) UNUSED UNUSED
+    [4] => ZEND_ASSIGN T(4) T(0) T(2)
+    [5] => ZEND_RETURN UNUSED 1 UNUSED
+    [6] => ZEND_HANDLE_EXCEPTION UNUSED UNUSED UNUSED
+    [function_table] => 
+    [class_table] => 
+)
