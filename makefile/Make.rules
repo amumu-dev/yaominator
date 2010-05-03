@@ -1,3 +1,6 @@
+ifndef MAKE_INCLUDED 
+
+MAKE_INCLUDED := 1
 
 ifndef DIR
 DIR=origin
@@ -13,4 +16,6 @@ endif
 else
 dir: 
 	@echo 'i am ' $(DIR)
+endif
+
 endif

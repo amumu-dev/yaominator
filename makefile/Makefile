@@ -1,3 +1,5 @@
 include ./Make.rules 
+include ./Make.rules 
 
-#DIR=test
+test:
+	@echo bim file is $(BIM_FILE)
