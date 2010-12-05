@@ -1,0 +1,2 @@
+C = UPLOAD "test.file"
+A = GENERATE B FOREACH 
