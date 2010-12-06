@@ -5,11 +5,11 @@
  * source: $Source$
  * #!/home/y/bin/php -d memory_limit=750M -d open_basedir=
  */
+class A {
 
-#require_once 'autoload.php';
-require_once 'A.php' ;
+    public function myfunc ()
+    {
+        print "I am A in root directory \n"; 
+    }
+}
 
-exit;
-#$a = new A();
-
-#$a->myfunc();
