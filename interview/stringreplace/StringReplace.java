@@ -1,4 +1,4 @@
-//import java.util.*;
+import java.util.*;
 
 public class StringReplace {
 
@@ -6,23 +6,23 @@ public class StringReplace {
     public static void main( String[] args )
     {
 
-        String s = "abcdefgdfegabcabc";
+        StringBuilder sb = replace( "aa" , "aaa" );
+        assert "aa".equals(sb.toString()) : sb + " equal to aa";
 
-    
-        replace( s );
+        //System.out.println(sb);
     }
 
-    public static String replace( String s)
-    {
-        String patten = "abc";
-        char replacement = 'X';
+    
 
+    public static StringBuilder replace( String s , String patten )
+    {
+        char replacement = 'X';
         StringBuilder sb = new StringBuilder();
         int i = 0;
         while( i< s.length() )
         {
 
-            boolean isEqual = true ;
+            boolean isEqual = false ;
 
             for( int j = 0 ; j < patten.length() && i+j < s.length() ; j++ )
             {
@@ -31,6 +31,9 @@ public class StringReplace {
                     isEqual = false;
                     break;
                 }
+                if( j == patten.length() - 1)
+                    isEqual = true;
+
             }
 
             if( isEqual )
@@ -48,11 +51,9 @@ public class StringReplace {
             //if( i % 2 == 0)
             //    sb.deleteCharAt( sb.length() - 1);
             //System.out.print( c );
-        
         }
-
-        System.out.println( sb);
-        return patten;
+        //System.out.println( sb);
+        return sb;
     }
 
 }

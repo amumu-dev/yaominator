@@ -1,4 +1,4 @@
 all:
 	javac StringReplace.java 
 	@echo ============
-	@java StringReplace
+	@java -ea StringReplace
