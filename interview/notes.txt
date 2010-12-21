@@ -1,0 +1,63 @@
+Handout1
+A mutex is like a lock.  Mutexes are used in parallel programming to ensure that only one thread can access a shared resource at a time.
+
+Starts from 1, unlocks the mutex, mutex + 1 
+locks the mutex, wait until the number is positive and then decreases it by one 
+
+int mutex ;
+
+lock: 
+
+if( mutex > 0 )
+{
+    mutex = mutex - 1; 
+    continue working ;
+}
+
+unlock 
+
+mutex = mutex + 1 ;
+
+Semaphore's integer may start at a number greater than 1.  
+
+
+Semaphores 
+support "wait" and "signal" operations, which are analogous to the "lock" and "unlock" operations of mutexes. 
+
+Synchronized methods (in Java): 
+
+Each object in Java has its own mutex. Whenever a synchronized method is called, the mutex is locked.  When the method is finished, the mutex is unlocked. 
+
+How can we ensure that deadlock does not occur? 
+
+we can prevent deadlock if we assign an order to our locks and require that locks always be acquired in order. 
+
+lock1 , lock2, lock3 ...
+
+
+#############################################################
+What is polymorphism? 
+
+polymorphism is the ability of one method to have different behavior depending on the type of object it is being called on or the type of object being passed as a parameter. 
+
+the same function/method is being called by different object/parameters 
+
+
+virtual function 
+
+class A {
+    bar()
+}
+
+class B extends A {
+    bar();
+}
+
+A *foo = new B();
+foo->bar()
+
+
+if bar is a virtual functoin, B->bar() will be run , otherwise, A->bar() will be run.
+
+
+
