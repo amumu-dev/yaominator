@@ -22,26 +22,116 @@ public class BinaryTree {
         //bt.printPaths();
         //bt.mirror();
         //bt.printLevelOrder();
-        String str = bt.isBST() ? "is BST " : "not a BST ";
-        System.out.println( str );
-    
+        //bt.printZigZagOrder();
+        //bt.printLevel();
     }
     // Root node pointer. Will be null for an empty tree.
     private Node root;
+
+    public void printLevel()
+    {
+        for( int i = 1 ; i <= 4 ; i++)
+        {
+            printLevel( root , i );
+            System.out.println();
+        }
+    }
+
+    private void printLevel( Node node , int level )
+    {
+        if( node == null ) return ;
+
+        if( level == 1 )
+        {
+            System.out.print( " " + node.data ) ;
+            return ;
+        }
+
+        if( node.left != null)
+            printLevel( node.left , level - 1);
+
+        if( node.right != null)
+            printLevel( node.right , level - 1);
+
+    
+    }
 
     public boolean isBST()
     {
         int max = Integer.MAX_VALUE; 
         int min = Integer.MIN_VALUE; 
-        System.out.printf("max %s , min %s\n" , Integer.toBinaryString(1) , Integer.toBinaryString(-1)  );
-        //return isBST(root); 
-        return true;
+        //System.out.printf("max %s , min %s\n" , Integer.toBinaryString(1) , Integer.toBinaryString(-1)  );
+        return isBST(root, max , min ); 
     }
 
-    private boolean isBST( Node node ) {
+    private boolean isBST( Node node , int max , int min ) {
+
         return true;
     
     }
+
+    public void printZigZagOrder()
+    {
+        printZigZagOrder( root );
+    }
+
+    public void printZigZagOrder( Node node )
+    {
+        //if( node == null ) return ;
+       
+        Stack<Node> s = new Stack<Node>();
+        LinkedList<Node> q = new LinkedList<Node>();
+        LinkedList<Node> q2 = new LinkedList<Node>();
+
+        Node current = root ;
+        q.offer(current);
+        boolean left2right = false ;
+        int currentLevel = 1;
+        int nextLevel = 0;
+
+        while( !q.isEmpty())
+        {
+            current = q.poll();
+            currentLevel-- ;
+
+            if( current.left != null)
+            {
+                q.offer( current.left);
+                nextLevel++ ;
+            }
+        
+            if( current.right != null)
+            {
+                q.offer( current.right );
+                nextLevel++ ;
+            }
+
+            if( left2right )
+                s.push( current );
+            else 
+                q2.offer( current );
+
+            if( currentLevel == 0 )
+            {
+
+                while( !s.isEmpty() )
+                {
+                    System.out.print( "  " + s.pop().data );
+                }
+                while( !q2.isEmpty() )
+                {
+                    System.out.print( "  " + q2.poll().data );
+                }
+                left2right = !left2right ;
+                System.out.println();
+                currentLevel = nextLevel ;
+                nextLevel = 0 ;
+            }
+        }
+
+        System.out.println();
+    }
+
 
     public void mirror()
     {
