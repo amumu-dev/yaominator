@@ -1,0 +1,15 @@
+killall gnome-panel
+
+When I logged into the machine today, I was shocked to see no panel appearing on the ubuntu desktop. I thought the computer has hung. But when I right clicked the desktop, I got the regular pop-up menu and was able to change desktop wallpapers.
+
+Here is what I did to get the panel back. With the desktop without the panel and not remembering any of the shortcuts, it was quiet difficult.
+
+First, I created a launcher for Terminal. Right Click on any area on the desktop and then choose ‘Create Launcher’. Choose any name and then in the command text box, type in
+
+terminal
+This should create a terminal launcher. That done, double click to open a terminal session. Enter the following command,
+
+killall gnome-panel
+Then right click on the desktop to create another launcher. This time in the command text box, type in
+
+gnome-panel
