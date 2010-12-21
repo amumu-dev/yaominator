@@ -1,0 +1,8 @@
+Email System
+Exchange 2007
+WebMail Server
+https://sp2-webmail.corp.yahoo.com
+IMAP / Entourage Server
+sp2-webmail.corp.yahoo.com secure IMAP only
+Outlook Server
+sp2-ex07vs01.ds.corp.yahoo.com
