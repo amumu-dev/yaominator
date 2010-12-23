@@ -7,14 +7,20 @@ public class BinaryTree {
     public static void main( String[] args )
     {
         BinaryTree bt = new BinaryTree(); 
-        bt.insert( 4 );
+        /*
+        bt.insert( 17 );
         bt.insert( 6 );
+        bt.insert( 40 );
         bt.insert( 3 );
-        bt.insert( 5 );
-        //bt.insert( 8 );
-        bt.insert( 7 );
-        bt.insert( 2 );
+        bt.insert( 12 );
+        bt.insert( 56 );
         bt.insert( 1 );
+        bt.insert( 9 );
+        bt.insert( 10 );
+        bt.insert( 15 );
+        bt.insert(48);
+        */
+        
         //bt.printTree();
         //bt.printLevelOrder();
         //bt.printDFS();
@@ -22,11 +28,100 @@ public class BinaryTree {
         //bt.printPaths();
         //bt.mirror();
         //bt.printLevelOrder();
+        
+        //bt.delete(6);
+
+
         //bt.printZigZagOrder();
         //bt.printLevel();
+
+        //String str = bt.isBST() ? " is bst " : " not bst ";
+        //System.out.println(str);
+
+        constructTree();
     }
     // Root node pointer. Will be null for an empty tree.
     private Node root;
+
+    static String preOrder = "ABDHLEKCFG";
+    static String inOrder = "HLDBEKAFCG";
+
+    static char[] pre = preOrder.toCharArray();
+    static char[] in = inOrder.toCharArray();
+
+    public static void constructTree( int[])
+    {
+        for( int i = 0 ; i< pre.lenght ; i++)
+        {
+        
+        }
+
+    }
+
+
+    public boolean delete( int data )
+    {
+        Node current = root ;
+        Node parent = null;
+        //boolean found = false ;
+
+        while( current != null ) 
+        {
+            if( data > current.data)
+            {
+                parent = current;
+                current  = current.right ;
+            }
+            else if( data < current.data ){
+                parent = current;
+                current  = current.left ;
+            }
+            else 
+                break;
+        
+        }
+
+        if( current == null) return false ;
+        
+        // now we found it 
+        // case 1, no left subtree 
+
+        if( current.left == null  )
+        {
+            if( parent == null )
+                //delete root 
+                root = current.right ;
+
+            if( current.data > parent.data )
+                parent.right = current.right ;
+            else 
+                parent.left = current.right ;
+        }
+        //case 2 , now we have left 
+        else {
+        
+            // find the rightMost 
+            Node rightMost = null ;
+            Node child = current.left ;
+            parent = current ;
+
+            while( child.right != null )
+            {
+                parent = child ;
+                child = child.right ;
+            }
+
+            current.data = child.data ;
+
+            if( parent.right  == child  )
+                parent.right = child.left;
+            else
+                parent.left = child.left ;
+        }
+        return true;
+    }
+
+
 
     public void printLevel()
     {
@@ -60,14 +155,23 @@ public class BinaryTree {
     {
         int max = Integer.MAX_VALUE; 
         int min = Integer.MIN_VALUE; 
-        //System.out.printf("max %s , min %s\n" , Integer.toBinaryString(1) , Integer.toBinaryString(-1)  );
         return isBST(root, max , min ); 
     }
 
     private boolean isBST( Node node , int max , int min ) {
 
+        if( node == null ) return true ;
+
+        if( node.data > max || node.data < min )
+            return false;
+
+        if( node.left != null )
+            return isBST( node.left, node.data, min );
+
+        if( node.right != null )
+            return isBST( node.right , max , node.data );
+
         return true;
-    
     }
 
     public void printZigZagOrder()

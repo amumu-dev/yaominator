@@ -1,0 +1,34 @@
+
+To remove an element from a binary search tree, we first find the node containing 
+that element.  If the node has zero children, we simply remove it.  If it has one child, 
+we replace the node with its child.  If it has two children, we identify the next‐
+smaller or next‐larger element in the tree (it doesn't matter which), using an 
+algorithm which we do not describe here for the sake of brevity.  We set the element 
+stored in the node to this value.  Then, we splice the node that contained the value 
+from the tree.  This will be relatively easy, since the node will have at most one child.  
+For example, to remove 6 from the tree, we first change the node to have the value 
+3.  Then, we remove the node that used to have the value 3, and we make 1 the left 
+child of the node that used to have the value 6. 
+
+
+A small modification to a binary search tree allows it to be used to associate keys 
+with values, as in a hash table.  Instead of storing a single value in each node, one 
+could store a key‐value pair in each node.  The tree would be ordered based on the 
+nodes' keys. 
+
+
+Interviewers sometimes ask about binary search trees.  In addition, binary search 
+trees are often useful as a component of an answer to interview questions.  The 
+important thing to remember is that insertion, removal, and lookup take O(log n) 
+time (where n is the number of elements in the tree), since the height of a well‐
+balanced binary search tree is O(log n).  Although in the worst case, a binary search 
+tree might have a height of O(n), there are "self‐balancing" binary search trees that 
+periodically reorganize a BST to ensure a height of O(log n).  Many self‐balancing 
+BST's guarantee that operations take O(log n) time.  If you want to learn more about 
+particular types binary search trees, such as red‐black trees, we recommend looking 
+them up. 
+
+
+insertion, removal , lookup take O(log n)
+ 
+

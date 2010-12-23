@@ -1,0 +1,26 @@
+Write code in C,C++ or java to find whether a given binary tree is mirror image of itself?
+
+
+isMirror()
+{
+    if( root == null )
+        return true;
+    else
+        return isMirror( root.left ,root.right );
+
+}
+
+isMirror( Node leftroot , Node rightroot )
+{
+    if( leftroot == null && rightroot == null )
+        return true;
+
+    if( leftroot.data == rightroot.data )
+    {
+        return isMirror( leftroot.left , rightroot.right ) && isMirror( leftroot.right , rightroot.left);
+
+    }
+    else
+        return false;
+    
+}
