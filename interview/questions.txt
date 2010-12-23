@@ -24,3 +24,77 @@ isMirror( Node leftroot , Node rightroot )
         return false;
     
 }
+
+
+========================================================================================================================
+
+49 /*  利用前序中序序列创建树,参考了http://hi.baidu.com/sulipol/blog/item/f01a20011dcce31a738b6524.html
+ 50  *的实现,代码十分简洁,竟然只有短短的"令人发指"的8行,递归实在太彪悍了!!!!!!!!!!!!!!!!!!!!!
+ 51  *        i: 子树的前序序列字符串的首字符在pre[]中的下标
+ 52  *        j: 子树的中序序列字符串的首字符在mid[]中的下标
+ 53  *      len: 子树的字符串序列的长度
+ 54  */
+ 55 void PreMidCreateTree(PNode &pn, int i, int j, int len)
+ 56 {
+ 57     if(len <= 0)
+ 58         return;
+ 59     
+ 60     pn = new Node;
+ 61     pn->v = pre[i];
+ 62     int m = Position(pre[i]);
+ 63     PreMidCreateTree(pn->left, i+1, j, m-j);            //m-j为左子树字符串长度
+ 64     PreMidCreateTree(pn->right, i+(m-j)+1, m+1, len-1-(m-j));    //len-1-(m-j)为右子树字符串长度
+ 65 }
+ 66 
+ 67 
+ 68 /*  利用后序中序序列创建树
+ 69  *        i: 子树的后序序列字符串的尾字符在post[]中的下标
+ 70  *        j: 子树的中序序列字符串的首字符在mid[]中的下标
+ 71  *      len: 子树的字符串序列的长度
+ 72  */
+ 73 void PostMidCreateTree(PNode &pn, int i, int j, int len)
+ 74 {
+ 75     if(len <= 0)
+ 76         return;
+ 77 
+ 78     pn = new Node;
+ 79     pn->v = post[i];
+ 80     int m = Position(post[i]);
+ 81     PostMidCreateTree(pn->left, i-1-(len-1-(m-j)), j, m-j);//注意参数:m-j左子树的长度,len-1-(m-j)右子树的长度
+ 82     PostMidCreateTree(pn->right, i-1, m+1, len-1-(m-j));
+ 83 }
+
+
+========================================================================================================================
+Write code to find the power set of a given set. for example if S={a,b} the power set is P={{},{a},{b},{a,b}} 
+http://www.careercup.com/question?id=4356911
+
+e can do this using the number of bits equal to 1 of a number. If S has N elements and t = 0, we can loop to t = (1 << N) - 1 and at every step we check on which positions in t the bits are 1.Using the position, we show the element which is on that position in the set.For example:
+S = {a,b}
+t = 0 the bits are 00. We output {}
+t = 1 the bits are 01. we output {b}
+t = 2 the bits are 10. we output {a}
+t = 3 the bits are 11. we output {a,b}
+t = 4 > (1 << 2) - 1 . we stop
+
+
+========================================================================================================================
+
+There are 8 bottles, one has poison. What's the minimum number of rats you need to find the poison bottle in time T, and how? (You get the rats you need all at once, feed them all at the same time, and poison kills them after time T.
+Rat1 Rat2 Rat3
+1(001) 2(010) 4(100)
+3(011) 3(011) 5(110)
+5(101) 6(110) 6(110)
+7(111) 7(111) 7(111)
+
+
+========================================================================================================================
+
+Given two arrays A & B of length l, containing non negative integers, such that the sum of integers in A is the same as sum of integers in B.( The numbers need not be the same in both the arrays.)
+Now if you start with an index 'k' in each array and do the following summation, SUMMATION (Ak-Bk), where Ak is the value at index k of array A, and Bk is the value at index k of array B, where 'k' increments and wraps back all the way to k-1, the final sum value will be zero.
+Question: Find a suitable 'k' such that during any point in the summation, SUMMATION(Ak-Bk) is always non negative. Find such a 'k' in O(n) time.
+
+
+
+
+
