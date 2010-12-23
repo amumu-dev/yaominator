@@ -94,7 +94,58 @@ Given two arrays A & B of length l, containing non negative integers, such that 
 Now if you start with an index 'k' in each array and do the following summation, SUMMATION (Ak-Bk), where Ak is the value at index k of array A, and Bk is the value at index k of array B, where 'k' increments and wraps back all the way to k-1, the final sum value will be zero.
 Question: Find a suitable 'k' such that during any point in the summation, SUMMATION(Ak-Bk) is always non negative. Find such a 'k' in O(n) time.
 
+a={ 6 3 4 7 9 1 0}
+b={ 5 2 6 6 4 6 1}
+a-b={ 1 1 -2 1 5 -5 -1} 
+
+unsigned int FindIndex(int *a, int *b, unsigned int N)
+{
+	unsigned int k = 0;
+	int sum = 0;
+
+
+for (unsigned int i = 0; i < N; i++)
+	{
+		if (sum >= 0)
+			sum += a[i]-b[i];
+		else
+		{
+			k = i+1;
+            sum = 0;
+		}
+	}
 
 
 
+return k;
+}
+
+========================================================================================================================
+Verify if two BSTs are same, if same is defined as BSTs contain same sorted int array.
+
+just inOrder Traversal 
+
+
+========================================================================================================================
+
+Find all numbers with same popcount number
+
+int number_of_ones(unsigned int x)
+{
+    int total_ones = 0;
+    while (x != 0) {
+        x = x & (x-1);
+        total_ones++;
+    }
+    return total_ones;
+}
+
+
+========================================================================================================================
+Find kth number in a BST
+
+
+
+========================================================================================================================
+Convert a max heap to min heap.
 

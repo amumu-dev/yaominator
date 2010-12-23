@@ -1,8 +1,8 @@
 
 %.class : %.java  
-	javac $<
+	javac -Xlint:unchecke $<
 	@echo ===============
-	java $(basename $<) 
+	java -ea $(basename $<) 
 	
 	
 #@java  

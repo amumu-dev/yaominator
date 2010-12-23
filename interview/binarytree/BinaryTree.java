@@ -7,7 +7,6 @@ public class BinaryTree {
     public static void main( String[] args )
     {
         BinaryTree bt = new BinaryTree(); 
-        /*
         bt.insert( 17 );
         bt.insert( 6 );
         bt.insert( 40 );
@@ -19,7 +18,7 @@ public class BinaryTree {
         bt.insert( 10 );
         bt.insert( 15 );
         bt.insert(48);
-        */
+
         
         //bt.printTree();
         //bt.printLevelOrder();
@@ -42,22 +41,6 @@ public class BinaryTree {
     }
     // Root node pointer. Will be null for an empty tree.
     private Node root;
-
-    static String preOrder = "ABDHLEKCFG";
-    static String inOrder = "HLDBEKAFCG";
-
-    static char[] pre = preOrder.toCharArray();
-    static char[] in = inOrder.toCharArray();
-
-    public static void constructTree( int[])
-    {
-        for( int i = 0 ; i< pre.lenght ; i++)
-        {
-        
-        }
-
-    }
-
 
     public boolean delete( int data )
     {
