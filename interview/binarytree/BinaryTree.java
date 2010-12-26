@@ -7,20 +7,13 @@ public class BinaryTree {
     public static void main( String[] args )
     {
         BinaryTree bt = new BinaryTree(); 
-        bt.insert( 17 );
-        bt.insert( 6 );
-        bt.insert( 40 );
-        bt.insert( 3 );
-        bt.insert( 12 );
-        bt.insert( 56 );
-        bt.insert( 1 );
-        bt.insert( 9 );
-        bt.insert( 10 );
-        bt.insert( 15 );
-        bt.insert(48);
 
+        int[] sorted = { 1 ,2 ,3 ,4 ,5 ,6 ,7,8,9,10,11,12,13,14,15};
         
         //bt.printTree();
+        bt.insertArray( sorted , 0 , sorted.length ) ;
+        bt.inOrderNR();
+
         //bt.printLevelOrder();
         //bt.printDFS();
 
@@ -37,10 +30,74 @@ public class BinaryTree {
         //String str = bt.isBST() ? " is bst " : " not bst ";
         //System.out.println(str);
 
-        constructTree();
     }
     // Root node pointer. Will be null for an empty tree.
     private Node root;
+
+    
+    public void convertToDL( )
+    {
+        Node head = null; 
+        Node prev = null; 
+        convertToDL( root , prev , head );
+
+       
+    }
+
+    private void convertToDL( Node node , Node prev , Node head )
+    {
+        if( node == null ) return ;
+
+        convertToDL( p.left ,prev , head );
+        p.left = prev ;
+        if( prev != null )
+            prev.right = p ;
+        else 
+            head = p ;
+
+        Node right = p.right ;
+        head.left = p ;
+        p.right = head ;
+
+        prev = p; 
+        convertToDL( right , prev , head );
+    }
+
+    public void inOrderNR()
+    {
+        Node current = root ;
+        Stack<Node> s = new Stack<Node>();
+
+        s.push(current);
+        while( !s.isEmpty() || current != null )
+        {
+            if( current != null )
+            {
+                s.push(current);
+                current = current.left ;
+            }
+            else{
+                current = s.pop();
+                System.out.print("  " + current.data );
+                current = current.right ;
+            }
+        }
+        System.out.println();
+    }
+
+
+
+    public void insertArray( int[] array , int left , int right )
+    {
+        if( left >= right ) return ;
+        int mid = left + ( right - left ) /2 ;
+        BinaryTree bt = new BinaryTree( array[mid]);
+
+        insert( array[mid]) ;
+        insertArray( array , left , mid -1 );
+        insertArray( array , mid + 1, right  );
+
+    }
 
     public boolean delete( int data )
     {
