@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ./setenv.sh
-dotfiles=".vimrc .vim .screenrc"
+dotfiles=".vimrc .vim .screenrc .myrc"
 for dotfile in $dotfiles; 
 do
     echo link $dotfile ;
