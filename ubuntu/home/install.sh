@@ -3,6 +3,8 @@
 # This is a script used by jqyao to make things cool
 # cool
 
+git config --global user.name "Jiqing Yao"
+git config --global user.email "jiqingyao@gmail.com" 
 
 dotfiles=".vimrc .vim .screenrc"
 
