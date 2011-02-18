@@ -16,7 +16,9 @@ if( $opts{debug} )
 }
 elsif( $opts{verbose})
 {
+    LOGDIE "byebye";
     Log::Log4perl->easy_init($ERROR);
 }
 
 DEBUG Dumper( \%opts );
+
