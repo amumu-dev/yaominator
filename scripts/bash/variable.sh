@@ -46,4 +46,8 @@ echo " how many laptops do you have ?"
 #read -a laptops 
 echo " You have ${laptops[0]} , ${laptops[1]}"
 
+num=1
 
+for(( i=0 ; i<10; i++)); do
+    echo (num++)
+done
