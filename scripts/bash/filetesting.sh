@@ -22,8 +22,8 @@ if [ -z $1 ]; then
 else
     file=$1
 fi 
-
-if [ -b $file ]; then
+#### important 
+if [ ! -b $file ]; then
     echo $file is block file
 elif [ -e $file ]; then
     echo $file exists
