@@ -1,0 +1,19 @@
+§
+§ =============================================================
+§ ========== USER MACROS ======================================
+§ =============================================================
+§
+|AUTHOR|    = Jiqing Yao 
+|AUTHORREF| = 
+|EMAIL|     = jqyao@yahoo-inc.com 
+|COMPANY|   = Yahoo! Inc 
+|COPYRIGHT| = Copyright (c) |YEAR|, |AUTHOR|
+§
+§ =============================================================
+§ ========== FILE INCLUDES ====================================
+§ =============================================================
+§
+|includefile| = bash.comments.template
+|includefile| = bash.statements.template
+|includefile| = bash.paramsub.template
+§

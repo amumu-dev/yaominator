@@ -1,0 +1,84 @@
+<project>
+    <actions/>
+    <description/>
+    <logRotator>
+        <daysToKeep>10</daysToKeep>
+        <numToKeep>15</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+    </logRotator>
+    <keepDependencies>false</keepDependencies>
+    <properties>
+        <hudson.model.ParametersDefinitionProperty>
+            <parameterDefinitions>
+                <hudson.model.StringParameterDefinition>
+                    <name>SECOND</name>
+                    <description/>
+                    <defaultValue>20</defaultValue>
+                </hudson.model.StringParameterDefinition>
+                <hudson.model.BooleanParameterDefinition>
+                    <name>BOOL</name>
+                    <description>BOOL TEST</description>
+                    <defaultValue>true</defaultValue>
+                </hudson.model.BooleanParameterDefinition>
+            </parameterDefinitions>
+        </hudson.model.ParametersDefinitionProperty>
+        <hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+            <maxConcurrentPerNode>0</maxConcurrentPerNode>
+            <maxConcurrentTotal>1</maxConcurrentTotal>
+            <categories>
+                <string>mytest</string>
+            </categories>
+            <throttleEnabled>false</throttleEnabled>
+        </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+    </properties>
+    <scm class="hudson.scm.SubversionSCM">
+        <locations>
+            <hudson.scm.SubversionSCM_-ModuleLocation>
+                <remote>https://yaominator.googlecode.com/svn/trunk</remote>
+                <local>.</local>
+            </hudson.scm.SubversionSCM_-ModuleLocation>
+        </locations>
+        <excludedRegions/>
+        <includedRegions/>
+        <excludedUsers/>
+        <excludedRevprop/>
+        <excludedCommitMessages/>
+        <workspaceUpdater class="hudson.scm.subversion.UpdateUpdater"/>
+    </scm>
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers class="vector">
+        <hudson.triggers.TimerTrigger>
+            <spec>0 * * * *</spec>
+        </hudson.triggers.TimerTrigger>
+    </triggers>
+    <concurrentBuild>false</concurrentBuild>
+    <builders>
+        <hudson.tasks.Shell>
+            <command>/bin/sleep $SECOND ; /bin/echo done</command>
+        </hudson.tasks.Shell>
+    </builders>
+    <publishers>
+        <join.JoinTrigger>
+            <joinProjects>test_job</joinProjects>
+            <joinPublishers/>
+            <evenIfDownstreamUnstable>false</evenIfDownstreamUnstable>
+        </join.JoinTrigger>
+        <hudson.plugins.textfinder.TextFinderPublisher>
+            <regexp>true</regexp>
+            <succeedIfFound>true</succeedIfFound>
+            <unstableIfFound>false</unstableIfFound>
+            <alsoCheckConsoleOutput>true</alsoCheckConsoleOutput>
+        </hudson.plugins.textfinder.TextFinderPublisher>
+        <hudson.tasks.Mailer>
+            <recipients>test@yahoo-inc.com</recipients>
+            <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+            <sendToIndividuals>false</sendToIndividuals>
+        </hudson.tasks.Mailer>
+    </publishers>
+    <buildWrappers/>
+    <style/>
+</project>

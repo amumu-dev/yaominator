@@ -3,12 +3,38 @@
 
 use strict;
 
-use YAML;
+use YAML::Syck;
+use Data::Dumper;
+#use YAML;
 
-my $data = { new => [ 'ar1' , 'ar2' , 'ar3' , [ 'in1' , 'in2']] , old => { inner=> 1 }};
+#my $data = { new => [ 'ar1' , 'ar2' , 'ar3' , [ 'in1' , 'in2']] , old => { inner=> 1 }};
 
-print Dump($data);
+#print Dump($data);
 
-my @array = qw( 1 3 5 7 9);
-print Dump($data , \@array);
+#my @array = qw( 1 3 5 7 9);
+#print Dump($data , \@array);
 
+my $data;
+my $yaml;
+#{
+    #local $/=undef;
+    #$yaml= <DATA>;
+    #$data = Load($yaml) ;
+$data = LoadFile('test.yml') ;
+#}
+
+print Dumper($data);
+=pod
+colo:
+  corp: test
+  sp2: more 
+env:
+  prod:
+  sandbox:
+host:
+=cut
+
+#[colo: prod, env: sandbox]
+__DATA__
+settings: 
+   - test: [colo: prod]

@@ -1,0 +1,206 @@
+--- 
+actions: 
+  - {}
+
+assignedNode: 
+  - globalmedia_build_slaves
+blockBuildWhenUpstreamBuilding: 
+  - 'false'
+buildWrappers: 
+  - 
+    com.yahoo.yhudson.BuildyBlockBuildWrapper: 
+      - 
+        deletionPolicy: 
+          - 'FALSE'
+        pathToBim: 
+          - assembly/build/build-assemble.bim
+    hudson.plugins.locksandlatches.LockWrapper: 
+      - 
+        locks: 
+          - 
+            hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig: 
+              - 
+                name: 
+                  - lock_globalmedia-fe_baseplate-trunk-test-smoke-int1
+              - 
+                name: 
+                  - lock_globalmedia-fe_video-trunk-test-smoke-int1
+              - 
+                name: 
+                  - lock_globalmedia-fe_article-trunk-test-smoke-int1
+              - 
+                name: 
+                  - lock_globalmedia-fe_index-trunk-test-smoke-int1
+              - 
+                name: 
+                  - lock_globalmedia-fe_blogs-trunk-test-smoke-int1
+              - 
+                name: 
+                  - lock_globalmedia-fe_lists-trunk-test-smoke-int1
+              - 
+                name: 
+                  - lock_globalmedia-fe_social-trunk-test-smoke-int1
+              - 
+                name: 
+                  - lock_globalmedia-fe_photos-trunk-test-smoke-int1
+              - 
+                name: 
+                  - lock_globalmedia-fe_sharedfast-trunk-test-smoke-int1
+builders: 
+  - 
+    com.yahoo.yhudson.tasks.Gmake: 
+      - 
+        alternateMakefile: 
+          - Makefile
+        makefileLocation: 
+          - assembly
+        options: 
+          - 
+            com.yahoo.yhudson.tasks.GmakeParam: 
+              - 
+                param: 
+                  - {}
+
+        targets: 
+          - 
+            com.yahoo.yhudson.tasks.GmakeParam: 
+              - 
+                param: 
+                  - fe
+canRoam: 
+  - 'false'
+concurrentBuild: 
+  - 'false'
+description: 
+  - {}
+
+disabled: 
+  - 'false'
+keepDependencies: 
+  - 'false'
+logRotator: 
+  - 
+    artifactDaysToKeep: 
+      - -1
+    artifactNumToKeep: 
+      - -1
+    daysToKeep: 
+      - 15
+    numToKeep: 
+      - 15
+properties: 
+  - {}
+
+publishers: 
+  - 
+    hudson.plugins.ircbot.IrcPublisher: 
+      - 
+        buildToChatNotifier: 
+          - 
+            class: hudson.plugins.im.build_notify.SummaryOnlyBuildToChatNotifier
+        channels: 
+          - {}
+
+        notifyCulprits: 
+          - 'false'
+        notifyFixers: 
+          - 'false'
+        notifyOnBuildStart: 
+          - 'false'
+        notifySuspects: 
+          - 'false'
+        notifyUpstreamCommitters: 
+          - 'false'
+        strategy: 
+          - FAILURE_AND_FIXED
+        targets: 
+          - 
+            class: java.util.Collections$EmptyList
+    hudson.tasks.BuildTrigger: 
+      - 
+        childProjects: 
+          - globalmedia-fe_lists-trunk-test-smoke-int1, globalmedia-fe_article-trunk-test-smoke-int1, globalmedia-fe_baseplate-trunk-test-smoke-int1, globalmedia-fe_video-trunk-test-smoke-int1, globalmedia-fe_photos-trunk-test-smoke-int1, globalmedia-fe_blogs-trunk-test-smoke-int1, globalmedia-fe_social-trunk-test-smoke-int1
+        threshold: 
+          - 
+            color: 
+              - BLUE
+            name: 
+              - SUCCESS
+            ordinal: 
+              - 0
+    hudson.tasks.Fingerprinter: 
+      - 
+        recordBuildArtifacts: 
+          - 'false'
+        targets: 
+          - "dep/mlb_rhel5_yinst7_dev.state "
+    hudson.tasks.Mailer: 
+      - 
+        dontNotifyEveryUnstableBuild: 
+          - 'false'
+        recipients: 
+          - lego-build@yahoo-inc.com
+        sendToIndividuals: 
+          - 'false'
+    hudson.tasks.test.AggregatedTestResultPublisher: 
+      - {}
+
+    join.JoinTrigger: 
+      - 
+        evenIfDownstreamUnstable: 
+          - 'false'
+        joinProjects: 
+          - utility-fe-trunk-promote-Int1ToQa1-auto
+        joinPublishers: 
+          - {}
+
+scm: 
+  - 
+    browser: 
+      - 
+        class: hudson.scm.browsers.ViewSVN
+        url: 
+          - http://svn.corp.yahoo.com/view/yahoo/media/common/
+    class: hudson.scm.SubversionSCM
+    doRevert: 
+      - 'false'
+    excludedCommitMessages: 
+      - {}
+
+    excludedRegions: 
+      - {}
+
+    excludedRevprop: 
+      - {}
+
+    excludedUsers: 
+      - {}
+
+    includedRegions: 
+      - {}
+
+    locations: 
+      - 
+        hudson.scm.SubversionSCM_-ModuleLocation: 
+          - 
+            local: 
+              - assembly
+            remote: 
+              - svn+ssh://svn.corp.yahoo.com/yahoo/media/common/build/trunk/assembly
+          - 
+            local: 
+              - dep
+            remote: 
+              - svn+ssh://svn.corp.yahoo.com/yahoo/media/common/build/trunk/dep
+    useUpdate: 
+      - 'false'
+style: 
+  - {}
+
+triggers: 
+  - 
+    class: vector
+    hudson.triggers.TimerTrigger: 
+      - 
+        spec: 
+          - 0 * * * *
