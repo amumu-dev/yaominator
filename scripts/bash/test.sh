@@ -12,3 +12,7 @@
 hostgroup=fe
 
 echo ${hostgroup}1
+
+dir='/home/y/bin/test';
+
+echo ${dir%test}
