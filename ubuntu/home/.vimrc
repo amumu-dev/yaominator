@@ -166,6 +166,7 @@ nmap <silent> <F7> :NERDTreeToggle<CR>
 imap ( ()<Esc>i
 imap [ []<Esc>i
 imap { {}<Esc>i
+imap jj <Esc>
 
 inoremap " ""<Esc>i
 "inoremap ' ''<Esc>i
