@@ -3,9 +3,9 @@
 
 use strict;
 
-#use YAML::Syck;
-use YAML;
+use YAML::Syck;
 use Data::Dumper;
+#use YAML;
 
 #my $data = { new => [ 'ar1' , 'ar2' , 'ar3' , [ 'in1' , 'in2']] , old => { inner=> 1 }};
 
@@ -16,11 +16,12 @@ use Data::Dumper;
 
 my $data;
 my $yaml;
-{
-    local $/=undef;
-    $yaml= <DATA>;
-    $data = Load($yaml) ;
-}
+#{
+    #local $/=undef;
+    #$yaml= <DATA>;
+    #$data = Load($yaml) ;
+$data = LoadFile('test.yml') ;
+#}
 
 print Dumper($data);
 =pod

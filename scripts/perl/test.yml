@@ -1,0 +1,28 @@
+---
+  array: [ a1 , a2 , a3 ]
+  hash: {k1:v1,k2:v2,k3:v3}
+  text: &text001 | 
+         408 walkman dr.
+  shipto: *text001
+  test: " test \n haha"
+  testn: ' test \n haha'
+  comments: >
+     Latest one
+     and more 
+  product:
+    - 
+      sku : new 
+      haha : kaka 
+    - 
+      fat: kick
+      off: nba
+  try: [ k1: v1 , k2 : v2 ]
+  newthing: ' new fat is haha : test '
+  ?
+   rnewstyle
+  :
+    this is new style 
+  other: 
+    new: test
+    other: test
+  new: test
